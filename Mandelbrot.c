@@ -9,7 +9,7 @@ t_fractal   *create_struct(void)
     return (elem);
 }
 
-int create_fract(int x, int y, int width, int height)
+int escape_time_algo(int x, int y, int width, int height)
 {
     t_fractal  *mBrot;
     int         iterations;
@@ -50,7 +50,7 @@ int main(void)
         j = -1;
         while (++j < WIDTH)
         {
-            int color = create_fract(i, j, WIDTH, HEIGHT);
+            int color = escape_time_algo(i, j, WIDTH, HEIGHT);
             mlx_pixel_put(fractal->mlx, fractal->mlx_win, i, j, color);// redo the function
         }
     }
