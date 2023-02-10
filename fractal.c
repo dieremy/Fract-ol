@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx_mms_20191025_beta/mlx.h"
+#include "minilibx-linux/mlx.h"
 #include "fractal.h"
 
 t_fractal   *create_struct(void)
