@@ -13,78 +13,63 @@
 #include "minilibx-linux/mlx.h"
 #include "fractal.h"
 
-t_fractal   *create_struct(void)
+int ft_strcmp(char *s1, char *s2)
 {
-    t_fractal   *elem;
+    int i;
 
-    elem = malloc(sizeof(t_fractal));
-    return (elem);
+    i = 0;
+    while (s1[i] && s2[i] && s1[i] == s2[i])
+        i++;
+    return (s1[i] - s2[i]);
 }
 
-int close(int key_code, t_fractal *d)
+int ft_exit(int keycode, t_fractal *d)
 {
-    mlx_destroy_window(d->mlx, d->win);
+    if (keycode == KEY_ESC)
+    {
+        mlx_destroy_window(d->mlx, d->win);
+        exit(0);
+    }
     return (0);
 }
 
-int create_fract(int x, int y, int width, int height)
+int zoom(int button, double x, double y, t_fractal *d)
 {
-    t_fractal  mBrot;
-    double      xtemp;
-    int         max_i;
-    int         i;
-
-    max_i = 1000;
-    i = 0;
-    mBrot.x0 = (x - width / 2.0) * 4.0 / width;
-    mBrot.y0 = (y - height / 2.0) * 4.0 / width;
-    mBrot.x_ = 0;
-    mBrot.y_ = 0;
-    while (mBrot.x_ * mBrot.x_ + mBrot.y_ * mBrot.y_ <= 4 && i < max_i)
+    if (button == 5)
     {
-        xtemp = mBrot.x_ * mBrot.x_ - mBrot.y_ * mBrot.y_ + mBrot.x0;
-        mBrot.y_ = 2 * mBrot.x_ * mBrot.y_ + mBrot.y0;
-        mBrot.x_ = xtemp;
-        i++;
+        x *= 1.1;
+        y *= 1.1;
     }
-    if (i == max_i)
-        return 0;
-    else
-        return i * NEUTRALBLACK / max_i;
+    return (0);
 }
 
-void    my_mlx_pixel_put(t_fractal *d, int i, int j, int color)
+void    which_fract(char *s, t_fractal d)
 {
-    char    *dst;
-
-    dst = d->addr + (j * d->line_length + i * (d->bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
+    if (ft_strcmp(s, "Mandelbrot") == 0)
+        mandelbrot(d);
+    else if (ft_strcmp(s, "Julia") == 0)
+        julia(d);
 }
 
-//t_fractal   land_scape()
-
-int main(void)
+int main(int ac, char **av)
 {
     t_fractal   d;
-    int         i;
-    int         j;
 
-    d.mlx = mlx_init();
-    d.win = mlx_new_window(d.mlx, WIDTH, HEIGHT, "FRACTAL");
-    d.img = mlx_new_image(d.mlx, WIDTH, HEIGHT);
-    d.addr = mlx_get_data_addr(d.img, &d.bits_per_pixel, &d.line_length, &d.endian);
-    i = -1;
-    while (++i < WIDTH)
+    if (ac == 2)
     {
-        j = -1;
-        while (++j < WIDTH)
-        {
-            d.color = create_fract(i, j, WIDTH, HEIGHT);
-            my_mlx_pixel_put(&d, i, j, d.color);
-        }
+        d.mlx = mlx_init();
+        d.win = mlx_new_window(d.mlx, HW, HW, "FRACTAL");
+        d.img = mlx_new_image(d.mlx, HW, HW);
+        d.addr = (int *)mlx_get_data_addr(d.img, &d.bits_per_pixel, &d.line_length, &d.endian);
+        which_fract(av[1], d);
+        mlx_put_image_to_window(d.mlx, d.win, d.img, 0, 0);
+        mlx_hook(d.win, 2, 0, ft_exit, &d);
+        mlx_loop(d.mlx);
     }
-    mlx_put_image_to_window(d.mlx, d.win, d.img, 0, 0);
-    mlx_hook(d.win, 2, 1L<<0, close, &d);
-    mlx_loop(d.mlx);
+    else
+    {
+        write(1, "USAGE: ./fractol [fractal name]\n", 32);
+        write(1, "OPTIONS: Mandelbrot\tJulia", 26);
+    }
     return (0);
 }
