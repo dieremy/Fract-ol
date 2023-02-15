@@ -13,9 +13,17 @@
 #ifndef HOOK_H
 # define HOOK_H
 
+# define KEY_SHIFT 264
 # define KEY_ESC 53
+# define KEY_X 7
 # define KEY_PLUS 69
 # define KEY_MINUS 78
-# define KEY_DOWN 2
+# define KEY_DOWN 125
+# define KEY_UP 126
+# define KEY_RIGHT 124
+# define KEY_LEFT 123
+# define MOUSEDOWN 4
+# define MOUSEUP 5
+# define ON_DESTROY 17
 
 #endif
