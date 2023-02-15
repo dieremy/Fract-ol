@@ -60,6 +60,7 @@ void	mand_plane(t_fractal *mBrot);
 void	mandelbrot(t_fractal *mBrot);
 void	julia(t_fractal *julia);
 void    mlx_look(t_fractal *d);
+void	description(int ac, char **av);
 int		mouse_down(int button, double x, double y, t_fractal *d);
 int		ft_key_press(int keycode, t_fractal *d);
 int		ft_strcmp(char *s1, char *s2);
