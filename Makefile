@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 SRCS = fractal.c algos.c event.c
-COMP = cc -Wall -Wextra -Werror
+COMP = gcc -Wall -Wextra -Werror -Ofast
 MLX = -Lmlx_linux -lmlx_Linux -Lminilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
 NAME = fractal
 OBJS = $(SRCS:.c=.o)

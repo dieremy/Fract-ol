@@ -37,8 +37,10 @@ typedef struct s_fractal
 	double	y_start; //y1 negative(down)
 	double	y_end; //y2 positive(up)
 	double	zoom;
+	double	tmp;
 	double	x_shift;
 	double	y_shift;
+	double	scaling;
 	float		x; //1. axis for nested cicle
 	float		y; //2. axis for nested cicle
 	int		*addr;
@@ -53,16 +55,18 @@ typedef struct s_fractal
 }				t_fractal;
 
 void	put_pixel_image(int x, int y, t_fractal *d, int color);
-void	zoom(t_fractal *d, double x, double y, double zoom);
+void	zoom(t_fractal *d);
 void	which_fract(t_fractal *d);
 void	julia_plane(t_fractal *julia);
 void	mand_plane(t_fractal *mBrot);
+void	douady(t_fractal *dou);
 void	mandelbrot(t_fractal *mBrot);
 void	julia(t_fractal *julia);
 void    mlx_look(t_fractal *d);
-void	description(int ac, char **av);
-int		mouse_down(int button, double x, double y, t_fractal *d);
+void	description(int ac, char **av, t_fractal *d);
+int		mouse_hook(int button, int x, int y, t_fractal *d);
 int		ft_key_press(int keycode, t_fractal *d);
 int		ft_strcmp(char *s1, char *s2);
+int		ft_close(t_fractal *d);
 
 #endif
