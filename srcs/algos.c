@@ -21,9 +21,11 @@ void mandelbrot(t_fractal *mBrot)
         while (++mBrot->y < HW)
         {
             mand_plane(mBrot);
-            while (mBrot->zx * mBrot->zx + mBrot->zy * mBrot->zy < 4 && mBrot->i < mBrot->max_i)
+            while (mBrot->zx * mBrot->zx + mBrot->zy * mBrot->zy < 4
+             && mBrot->i < mBrot->max_i)
             {
-                mBrot->tmp = mBrot->zx * mBrot->zx - mBrot->zy * mBrot->zy + mBrot->cx;
+                mBrot->tmp = mBrot->zx * mBrot->zx - mBrot->zy * mBrot->zy
+                 + mBrot->cx;
                 mBrot->zy = 2 * mBrot->zx * mBrot->zy + mBrot->cy;
                 mBrot->zx = mBrot->tmp;
                 mBrot->i++;
@@ -43,10 +45,12 @@ void julia(t_fractal *julia)
         while (++julia->y < HW)
         {
             julia_plane(julia);
-            while (julia->zx * julia->zx + julia->zy * julia->zy < 4 && julia->i < julia->max_i)
+            while (julia->zx * julia->zx + julia->zy * julia->zy < 4
+             && julia->i < julia->max_i)
             {
                 julia->tmp = julia->zx;
-                julia->zx = julia->zx * julia->zx - julia->zy * julia->zy + julia->cx;
+                julia->zx = julia->zx * julia->zx - julia->zy * julia->zy
+                 + julia->cx;
                 julia->zy = 2 * julia->tmp * julia->zy + julia->cy;
                 julia->i++;
             }
@@ -65,10 +69,12 @@ void douady(t_fractal *dou)
         while (++dou->y < HW)
         {
             dou_plane(dou);
-            while (dou->zx * dou->zx + dou->zy * dou->zy < 4 && dou->i < dou->max_i)
+            while (dou->zx * dou->zx + dou->zy * dou->zy < 4
+             && dou->i < dou->max_i)
             {
                 dou->tmp = dou->zx;
-                dou->zx = dou->zx * dou->zx - dou->zy * dou->zy + dou->cx;
+                dou->zx = dou->zx * dou->zx - dou->zy * dou->zy
+                 + dou->cx;
                 dou->zy = 2 * dou->tmp * dou->zy + dou->cy;
                 dou->i++;
             }

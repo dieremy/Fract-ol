@@ -24,16 +24,20 @@ int ft_strcmp(char *s1, char *s2)
 
 void    description(int ac, char **av)
 {
-    if (ft_strcmp(av[1], "Mandelbrot") == 0 || ft_strcmp(av[1], "Julia") == 0 || ft_strcmp(av[1], "Douady") == 0)
+    if (!ft_strcmp(av[1], "Mandelbrot") || !ft_strcmp(av[1], "Julia")
+     || !ft_strcmp(av[1], "Douady"))
     {
-        write(1, "KEYBOARD SHORCUTS\n\n", 20);
-        write(1, "CLOSE THE PROGRAM:\tX/ESC\n", 25);
-        write(1, "CHANGE COLOR SHADE:\tSHIFT\n", 26);
-        write(1, "MOVE FRACTAL:\t\tARROW-LEFT/ARROW-RIGHT/ARROW-UP/ARROW-DOWN\n", 58);
-        write(1, "ZOOM/UNZOOM:\t\tPLUS/MINUS\n", 25);
-        write(1, "CHANGE TO JULIA:\tJ\n", 19);
-        write(1, "CHANGE TO MANDELBROT:\tM\n", 24);
-        write(1, "CHANGE TO DOUADY:\tD\n", 20);
+        write(1, "\nKEYBOARD SHORCUTS:\n", 21);
+        write(1, "\tCLOSE THE PROGRAM:\tX/ESC\n", 26);
+        write(1, "\tCHANGE COLOR SHADE:\tSHIFT\n", 27);
+        write(1, "\tMOVE FRACTAL:\t\t", 16);
+        write(1, "\tARROWS\n", 8);
+        write(1, "\tZOOM/UNZOOM:\t\tPLUS/MINUS\n", 26);
+        write(1, "\tCHANGE TO JULIA:\tJ\n", 20);
+        write(1, "\tCHANGE TO MANDELBROT:\tM\n", 25);
+        write(1, "\tCHANGE TO DOUADY:\tD\n", 21);
+        write(1, "\nMOUSE INTERATION:\n", 19);
+        write(1, "\tZOOM/UNZOOM:\t\tMOUSE ROLL\n", 26);
     }
 }
 
