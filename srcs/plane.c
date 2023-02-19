@@ -15,7 +15,6 @@
 void    mand_plane(t_fractal *mBrot)
 {
     mBrot->color = mBrot->i * BLUE + mBrot->shade;
-    mBrot->max_i = 500;
     mBrot->i = 0;
     mBrot->cx = (mBrot->x / (HW / (mBrot->x_end - mBrot->x_start))
      + mBrot->x_start) * mBrot->zoom + mBrot->x_shift; 
@@ -27,8 +26,7 @@ void    mand_plane(t_fractal *mBrot)
 
 void    julia_plane(t_fractal *julia)
 {
-    julia->color = julia->i * VIOLET + julia->shade;
-    julia->max_i = 500;
+    julia->color = julia->i * RED + julia->shade;
     julia->i = 0;
     julia->zx = (julia->x / (HW / (julia->x_end - julia->x_start))
      + julia->x_start) * julia->zoom + julia->x_shift;
@@ -41,7 +39,6 @@ void    julia_plane(t_fractal *julia)
 void    dou_plane(t_fractal *dou)
 {
     dou->color = dou->i * BLACK + dou->shade;
-    dou->max_i = 500;
     dou->i = 0;
     dou->zx = (dou->x / (HW / (dou->x_end - dou->x_start))
      + dou->x_start) * dou->zoom + dou->x_shift;

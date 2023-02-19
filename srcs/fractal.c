@@ -12,8 +12,22 @@
 
 #include "../incls/fractal.h"
 
+t_fractal   *create_struct()
+{
+    t_fractal   *out;
+
+    out = (t_fractal *)malloc(sizeof(t_fractal));
+    if (!out)
+    {
+        free(out);
+        return (NULL);
+    }
+    return (out);
+}
+
 void    id(char *s, t_fractal *d)
 {
+    d->max_i = 50;
     d->name = s;
     d->zoom = 1;
     d->x_shift = 0;
@@ -30,6 +44,7 @@ void    which_fract(t_fractal *d)
     if (ft_strcmp(d->name, "Mandelbrot") && ft_strcmp(d->name, "Julia")
      && ft_strcmp(d->name, "Douady"))
     {
+        mlx_destroy_window(d->mlx, d->win);
         write(1, "USAGE: ./fractal", 16);
         write(1, "\tMandelbrot\tJulia\tDouady", 24);
         exit(0);
@@ -40,13 +55,6 @@ void    which_fract(t_fractal *d)
         julia(d);
     else if (ft_strcmp(d->name, "Douady") == 0)
         douady(d);
-}
-t_fractal   *create_struct()
-{
-    t_fractal   *out;
-
-    out = (t_fractal *)malloc(sizeof(t_fractal));
-    return (out);
 }
 
 int main(int ac, char **av)
@@ -61,7 +69,7 @@ int main(int ac, char **av)
         d->win = mlx_new_window(d->mlx, HW, HW, "FRACT'OL");
         d->img = mlx_new_image(d->mlx, HW, HW);
         d->addr = (int *)mlx_get_data_addr(d->img, &d->bits_per_pixel,
-         &d->line_length, &d->endian);
+        &d->line_length, &d->endian);
         id(av[1], d);
         which_fract(d);
     }

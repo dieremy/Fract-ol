@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/fractal.c srcs/algos.c srcs/event.c srcs/plane.c srcs/user_inter.c
+SRCS = srcs/fractal.c srcs/algos.c srcs/event.c srcs/plane.c srcs/strs.c
 COMP = gcc -Wall -Wextra -Werror -Ofast
 MLX = -lmlx -framework OpenGL -framework AppKit
 NAME = fractal
