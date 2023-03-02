@@ -42,9 +42,9 @@ int	mouse_hook(int button, int x, int y, t_fractal *d)
 	d->x = x;
 	d->y = y;
 	if (button == 5)
-		d->zoom *= 1.5;
+		d->zoom *= 2.0;
 	else if (button == 4)
-		d->zoom *= 0.9;
+		d->zoom /= 2.0;
 	else if (button == 1)
 		mouse_butt(d->x, d->y, d);
 	which_fract(d);
