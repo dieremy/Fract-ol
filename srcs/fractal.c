@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractal.h"
+#include "../incl/fractal.h"
 
 int ft_strcmp(char *s1, char *s2)
 {
@@ -25,7 +25,6 @@ int ft_strcmp(char *s1, char *s2)
 t_fractal    *id(char *s, t_fractal *d)
 {
 	d->max_i = 50;
-	// d->i = 0;
 	d->name = s;
 	d->zoom = 1;
 	d->x_shift = 0;
@@ -62,8 +61,8 @@ void    which_fract(t_fractal *d)
 	if (ft_strcmp(d->name, "Mandelbrot") && ft_strcmp(d->name, "Julia")
 	 && ft_strcmp(d->name, "Douady"))
 	{
-		write(1, "USAGE: ./fractal", 16);
-		write(1, "\tMandelbrot\tJulia\tDouady\n", 25);
+		write(2, "USAGE: ./fractal", 16);
+		write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
 		exit(0);
 	}
 	if (ft_strcmp(d->name, "Mandelbrot") == 0)
@@ -74,71 +73,6 @@ void    which_fract(t_fractal *d)
 		douady(d);
 }
 
-void    which_plane(t_fractal *d)
-{
-	// if (ft_strcmp(d->name, "Mandelbrot") && ft_strcmp(d->name, "Julia")
-	//  && ft_strcmp(d->name, "Douady"))
-	// {
-	// 	write(1, "USAGE: ./fractal", 16);
-	// 	write(1, "\tMandelbrot\tJulia\tDouady\n", 25);
-	// 	exit(0);
-	// }
-	if (ft_strcmp(d->name, "Mandelbrot") == 0)
-		mand_plane(d);
-	else if (ft_strcmp(d->name, "Julia") == 0)
-		julia_plane(d);
-	else if (ft_strcmp(d->name, "Douady") == 0)
-		dou_plane(d);
-}
-
-// t_fractal   *create_struct()
-// {
-//     t_fractal   *out;
-
-//     out = (t_fractal *)malloc(sizeof(t_fractal));
-//     return (out);
-// }
-
-void	draw(t_fractal *d)
-{
-	d->x = 0;
-	while (d->x)
-	{
-		d->y = 0;
-		while (d->y)
-		{
-			// which_plane(d);
-			which_fract(d);
-			// put_pixel_image(d->x, d->y, d, d->color);
-			d->y++;
-		}
-		d->x++;
-	}
-}
-
-void	plot(t_fractal *d)
-{
-	wipe_start(d);
-	draw(d);
-	// put_pixel_image(d->x, d->y, d, d->color);
-}
-
-void	wipe_start(t_fractal *d)
-{
-	mlx_destroy_image(d->mlx, d->img);
-	init_img(d);
-}
-
-t_fractal	*init_img(t_fractal *d)
-{
-	d->mlx = mlx_init();
-	d->win = mlx_new_window(d->mlx, HW, HW, "FRACT'OL");
-	d->img = mlx_new_image(d->mlx, HW, HW);
-	d->addr = mlx_get_data_addr(d->img, &d->bits_per_pixel,
-		&d->line_length, &d->endian);
-	return (d);
-}
-
 int main(int ac, char **av)
 {
 	t_fractal   *d;
@@ -147,22 +81,18 @@ int main(int ac, char **av)
 	{
 		d = (t_fractal *)malloc(sizeof(t_fractal));
 		description(av);
-		init_img(d);
-		// d->mlx = mlx_init();
-		// d->win = mlx_new_window(d->mlx, HW, HW, "FRACT'OL");
-		// d->img = mlx_new_image(d->mlx, HW, HW);
-		// d->addr = (int *)mlx_get_data_addr(d->img, &d->bits_per_pixel,
-		//  &d->line_length, &d->endian);
+		d->mlx = mlx_init();
+		d->win = mlx_new_window(d->mlx, HW, HW, "FRACT'OL");
+		d->img = mlx_new_image(d->mlx, HW, HW);
+		d->addr = (int *)mlx_get_data_addr(d->img, &d->bits_per_pixel,
+		 &d->line_length, &d->endian);
 		id(av[1], d);
-		// which_plane(d);
 		which_fract(d);
-		plot(d);
-		mlx_loop(d->mlx);
 	}
 	else
 	{
-		write(1, "USAGE: ./fractal", 16);
-		write(1, "\tMandelbrot\tJulia\tDouady\n", 25);
+		write(2, "USAGE: ./fractal", 16);
+		write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
 	}
 	return (0);
 }

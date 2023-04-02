@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = fractal.c algos.c event.c
+SRCS = srcs/fractal.c srcs/algos.c srcs/event.c srcs/utils.c
 COMP = gcc -Wall -Wextra -Werror -Ofast
 MLX = -Lmlx_linux -lmlx_Linux -Lminilibx-linux -Imlx_linux -lXext -lX11 -lm -lz
 NAME = fractal
