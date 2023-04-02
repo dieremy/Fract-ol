@@ -38,6 +38,8 @@ t_fractal    *id(char *s, t_fractal *d)
 
 void    description(int ac, char **av, t_fractal *d)
 {
+    (void)ac;
+    (void)d;
     if (!ft_strcmp(av[1], "Mandelbrot") || !ft_strcmp(av[1], "Julia")
      || !ft_strcmp(av[1], "Douady"))
     {
