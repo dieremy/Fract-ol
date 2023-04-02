@@ -14,13 +14,13 @@
 
 int mouse_hook(int button, int x, int y, t_fractal *d)
 {
-    if (button == 5)
+    if (button == MOUSEUP)
     {
         d->y = y;
         d->x = x;
         d->zoom *= 1.5;
     }
-    else if (button == 4)
+    else if (button == MOUSEDOWN)
     {
         d->y = y;
         d->x = x;
@@ -30,7 +30,13 @@ int mouse_hook(int button, int x, int y, t_fractal *d)
     {
         d->y = y;
         d->x = x;
-        d->zoom /= 1.5;
+        d->x_shift = (d->x / (HW / (d->x_end - d->x_start))
+            + d->x_start) * d->zoom + d->x_shift;
+        d->y_shift = (d->y / (HW / (d->y_end - d->y_start))
+            + d->y_start) * d->zoom + d->y_shift;
+        which_fract(d);
+        // d->x_shift = ((d->x - (HW / 2.0)) * (4.0 / HW) * (1.0 / d->zoom)) + d->x_shift;
+        // d->y_shift = ((HW / 2.0) - d->y) * (4.0 / HW) * (1.0 / d->zoom) + d->y_shift;
     }
     which_fract(d);
     return (0);  
@@ -81,24 +87,24 @@ int ft_close(t_fractal *d)
 
 int ft_key_press3(int keycode, t_fractal *d)
 {
-    if (keycode == 65307 || keycode == 120)
+    if (keycode == KEY_ESC || keycode == KEY_X)
     {//ESC - X
         write(1, "\nWELCOME BACK TO REALITY SON.\n", 30);
         mlx_destroy_window(d->mlx, d->win);
         free(d);
         exit(0);
     }
-    else if (keycode == 65506 || keycode == 65505)
+    else if (keycode == KEY_SHIFT_L || keycode == KEY_SHIFT_R)
     {//shift
         d->shade -= 4000;
         which_fract(d);
     }
-    else if (keycode == 45)
+    else if (keycode == KEY_MINUS)
     {//minus
         d->zoom += 0.02;
         which_fract(d);
     }
-    else if (keycode == 61)
+    else if (keycode == KEY_PLUS)
     {//plus
         d->zoom -= 0.02;
         which_fract(d);
@@ -108,17 +114,17 @@ int ft_key_press3(int keycode, t_fractal *d)
 
 int ft_key_press2(int keycode, t_fractal *d)
 {
-    if (keycode == 109)
+    if (keycode == KEY_M)
     {
         d->name = "Mandelbrot";
         which_fract(d);
     }
-    else if (keycode == 106)
+    else if (keycode == KEY_J)
     {
         d->name = "Julia";
         which_fract(d);
     }
-    else if (keycode == 100)
+    else if (keycode == KEY_D)
     {
         d->name = "Douady";
         which_fract(d);
@@ -130,22 +136,22 @@ int ft_key_press2(int keycode, t_fractal *d)
 
 int ft_key_press(int keycode, t_fractal *d)
 {
-    if (keycode == 65361)
+    if (keycode == KEY_LEFT)
     {//sx
         d->x_shift -= 0.04;
         which_fract(d);
     }
-    else if (keycode == 65363)
+    else if (keycode == KEY_RIGHT)
     {//dx
         d->x_shift += 0.04;
         which_fract(d);
     }
-    else if (keycode == 65364)
+    else if (keycode == KEY_DOWN)
     {//down
         d->y_shift += 0.04;
         which_fract(d);
     }
-    else if (keycode == 65362)
+    else if (keycode == KEY_UP)
     {//up
         d->y_shift -= 0.04;
         which_fract(d);
