@@ -12,9 +12,9 @@
 
 #include "../incl/fractal.h"
 
-int ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] && s2[i] && s1[i] == s2[i])
@@ -22,7 +22,7 @@ int ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-t_fractal    *id(char *s, t_fractal *d)
+t_fractal	*id(char *s, t_fractal *d)
 {
 	d->max_i = 50;
 	d->name = s;
@@ -37,10 +37,10 @@ t_fractal    *id(char *s, t_fractal *d)
 	return (d);
 }
 
-void    description(char **av)
+void	description(char *av[])
 {
 	if (!ft_strcmp(av[1], "Mandelbrot") || !ft_strcmp(av[1], "Julia")
-	 || !ft_strcmp(av[1], "Douady"))
+		|| !ft_strcmp(av[1], "Douady"))
 	{
 		write(1, "KEYBOARD SHORCUTS:\n", 20);
 		write(1, "\tCLOSE THE WINDOW:\tX/ESC\n", 25);
@@ -53,13 +53,14 @@ void    description(char **av)
 		write(1, "\tCHANGE TO DOUADY:\tD\n", 21);
 		write(1, "MOUSE INTERATION:\n", 18);
 		write(1, "\tZOOM/UNZOOM:\t\tMOUSE ROLL\n", 26);
+		write(1, "\tZOOM & MOVE:\t\tLEFT MOUSE CLICK\n", 32);
 	}
 }
 
-void    which_fract(t_fractal *d)
+void	which_fract(t_fractal *d)
 {
 	if (ft_strcmp(d->name, "Mandelbrot") && ft_strcmp(d->name, "Julia")
-	 && ft_strcmp(d->name, "Douady"))
+		&& ft_strcmp(d->name, "Douady"))
 	{
 		write(2, "USAGE: ./fractal", 16);
 		write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
@@ -73,9 +74,9 @@ void    which_fract(t_fractal *d)
 		douady(d);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_fractal   *d;
+	t_fractal	*d;
 
 	if (ac == 2)
 	{
@@ -85,7 +86,7 @@ int main(int ac, char **av)
 		d->win = mlx_new_window(d->mlx, HW, HW, "FRACT'OL");
 		d->img = mlx_new_image(d->mlx, HW, HW);
 		d->addr = (int *)mlx_get_data_addr(d->img, &d->bits_per_pixel,
-		 &d->line_length, &d->endian);
+				&d->line_length, &d->endian);
 		id(av[1], d);
 		which_fract(d);
 	}

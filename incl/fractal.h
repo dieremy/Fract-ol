@@ -28,21 +28,21 @@ typedef struct s_fractal
 	void	*mlx;
 	void	*win;
 	void	*img;
-	double	zx; //Z's real part
-	double	zy; //Z's imaginary part
-	double	cx; //C's real part
-	double	cy; //C's imaginary part
-	double	x_start; //x1 negative(sx)
-	double	x_end; //x2 positive(dx)
-	double	y_start; //y1 negative(down)
-	double	y_end; //y2 positive(up)
+	double	zx;
+	double	zy;
+	double	cx;
+	double	cy;
+	double	x_start;
+	double	x_end;
+	double	y_start;
+	double	y_end;
 	double	zoom;
 	double	tmp;
 	double	x_shift;
 	double	y_shift;
 	double	scaling;
-	float	x; //1. axis for nested cicle
-	float	y; //2. axis for nested cicle
+	float	x;
+	float	y;
 	int		*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -58,13 +58,13 @@ void	put_pixel_image(int x, int y, t_fractal *d, int color);
 void	julia_plane(t_fractal *julia);
 void	mandelbrot(t_fractal *mBrot);
 void	mand_plane(t_fractal *mBrot);
-void    dou_plane(t_fractal *dou);
+void	dou_plane(t_fractal *dou);
 void	which_fract(t_fractal *d);
 void	julia(t_fractal *julia);
-void    mlx_look(t_fractal *d);
+void	mlx_look(t_fractal *d);
 void	description(char **av);
 void	douady(t_fractal *dou);
-void    str_put(t_fractal *d);
+void	str_put(t_fractal *d);
 void	zoom(t_fractal *d);
 int		mouse_hook(int button, int x, int y, t_fractal *d);
 int		ft_key_press(int keycode, t_fractal *d);

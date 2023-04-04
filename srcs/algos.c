@@ -14,7 +14,7 @@
 
 void	put_pixel_image(int x, int y, t_fractal *d, int color)
 {
-	int pos;
+	int	pos;
 
 	pos = (y * HW) + x;
 	d->addr[pos] = color;
@@ -30,21 +30,21 @@ void	mandelbrot(t_fractal *mBrot)
 		{
 			mand_plane(mBrot);
 			while (mBrot->zx * mBrot->zx + mBrot->zy * mBrot->zy < 4
-			 && mBrot->i < mBrot->max_i)
+				&& mBrot->i < mBrot->max_i)
 			{
 				mBrot->tmp = mBrot->zx * mBrot->zx - mBrot->zy * mBrot->zy
-				 + mBrot->cx;
+					+ mBrot->cx;
 				mBrot->zy = 2 * mBrot->zx * mBrot->zy + mBrot->cy;
 				mBrot->zx = mBrot->tmp;
 				mBrot->i++;
 			}
-			put_pixel_image(mBrot->x, mBrot->y, mBrot, mBrot->color);			
+			put_pixel_image(mBrot->x, mBrot->y, mBrot, mBrot->color);
 		}
 	}
 	mlx_look(mBrot);
 }
 
-void julia(t_fractal *julia)
+void	julia(t_fractal *julia)
 {
 	julia->x = -1;
 	while (++julia->x < HW)
@@ -54,11 +54,11 @@ void julia(t_fractal *julia)
 		{
 			julia_plane(julia);
 			while (julia->zx * julia->zx + julia->zy * julia->zy < 4
-			 && julia->i < julia->max_i)
+				&& julia->i < julia->max_i)
 			{
 				julia->tmp = julia->zx;
 				julia->zx = julia->zx * julia->zx - julia->zy * julia->zy
-				 + julia->cx;
+					+ julia->cx;
 				julia->zy = 2 * julia->tmp * julia->zy + julia->cy;
 				julia->i++;
 			}
@@ -68,7 +68,7 @@ void julia(t_fractal *julia)
 	mlx_look(julia);
 }
 
-void douady(t_fractal *dou)
+void	douady(t_fractal *dou)
 {
 	dou->x = -1;
 	while (++dou->x < HW)
@@ -77,7 +77,8 @@ void douady(t_fractal *dou)
 		while (++dou->y < HW)
 		{
 			dou_plane(dou);
-			while (dou->zx * dou->zx + dou->zy * dou->zy < 4 && dou->i < dou->max_i)
+			while (dou->zx * dou->zx + dou->zy * dou->zy < 4
+				&& dou->i < dou->max_i)
 			{
 				dou->tmp = dou->zx;
 				dou->zx = dou->zx * dou->zx - dou->zy * dou->zy + dou->cx;

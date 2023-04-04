@@ -12,7 +12,7 @@
 
 #include "../incl/fractal.h"
 
-int mouse_hook(int button, int x, int y, t_fractal *d)
+int	mouse_hook(int button, int x, int y, t_fractal *d)
 {
 	d->x = x;
 	d->y = y;
@@ -24,26 +24,26 @@ int mouse_hook(int button, int x, int y, t_fractal *d)
 	{
 		d->zoom *= 0.9;
 		d->x_shift = (d->x / (HW / (d->x_end - d->x_start))
-			+ d->x_start) * d->zoom + d->x_shift;
+				+ d->x_start) * d->zoom + d->x_shift;
 		d->y_shift = (d->y / (HW / (d->y_end - d->y_start))
-			+ d->y_start) * d->zoom + d->y_shift;
+				+ d->y_start) * d->zoom + d->y_shift;
 	}
 	which_fract(d);
-	return (0);  
+	return (0);
 }
 
-void    mlx_look(t_fractal *d)
+void	mlx_look(t_fractal *d)
 {
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 	str_put(d);
 	mlx_key_hook(d->win, ft_key_press, d);
-	mlx_hook(d->win, 17, 1L<<0, ft_close, d);
+	mlx_hook(d->win, 17, 1L << 0, ft_close, d);
 	mlx_mouse_hook(d->win, mouse_hook, d);
 	mlx_loop(d->mlx);
 	free(d);
 }
 
-int ft_key_press3(int keycode, t_fractal *d)
+int	ft_key_press3(int keycode, t_fractal *d)
 {
 	if (keycode == KEY_ESC || keycode == KEY_X)
 	{
@@ -62,7 +62,7 @@ int ft_key_press3(int keycode, t_fractal *d)
 	return (0);
 }
 
-int ft_key_press2(int keycode, t_fractal *d)
+int	ft_key_press2(int keycode, t_fractal *d)
 {
 	if (keycode == KEY_M)
 	{
@@ -84,7 +84,7 @@ int ft_key_press2(int keycode, t_fractal *d)
 	return (0);
 }
 
-int ft_key_press(int keycode, t_fractal *d)
+int	ft_key_press(int keycode, t_fractal *d)
 {
 	if (keycode == KEY_LEFT)
 	{
@@ -110,4 +110,3 @@ int ft_key_press(int keycode, t_fractal *d)
 		ft_key_press2(keycode, d);
 	return (0);
 }
-

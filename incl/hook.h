@@ -28,6 +28,6 @@
 # define KEY_D			100
 # define MOUSEDOWN		4
 # define MOUSEUP		5
-# define MOUSELEFT      1
+# define MOUSELEFT		1
 
 #endif
