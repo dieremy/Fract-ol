@@ -22,8 +22,9 @@ void	put_pixel_image(int x, int y, t_fractal *d, int color)
 
 void	*mandelbrot(void *void_mBrot)
 {
-    t_fractal   *mBrot = (t_fractal *)void_mBrot;
-
+    t_fractal   *mBrot;
+	
+	mBrot = (t_fractal *)void_mBrot;
 	mBrot->x = -1;
 	while (++mBrot->x < HW)
 	{
@@ -49,8 +50,9 @@ void	*mandelbrot(void *void_mBrot)
 
 void	*julia(void *void_julia)
 {
-    t_fractal   *julia = (t_fractal *)void_julia;
+    t_fractal   *julia;
 	
+	julia = (t_fractal *)void_julia;
     julia->x = -1;
 	while (++julia->x < HW)
 	{
@@ -76,8 +78,9 @@ void	*julia(void *void_julia)
 
 void	*douady(void *void_dou)
 {
-    t_fractal   *dou = (t_fractal *)void_dou;
+    t_fractal   *dou;
 	
+	dou = (t_fractal *)void_dou;
     dou->x = -1;
 	while (++dou->x < HW)
 	{

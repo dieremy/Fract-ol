@@ -47,7 +47,7 @@ int	ft_key_press3(int keycode, t_fractal *d)
 {
 	if (keycode == KEY_ESC || keycode == KEY_X)
 	{
-		write(1, "\nWELCOME BACK TO REALITY SON.\n", 30);
+		write(1, "\nNICE COOK\n", 11);
 		mlx_destroy_window(d->mlx, d->win);
 		free(d);
 		exit(0);

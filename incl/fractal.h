@@ -25,7 +25,7 @@
 # include <pthread.h> 
 # include <string.h>
 
-# define NUM_THREADS 10
+# define NUM_THREADS 20
 
 typedef struct s_fractal
 {
