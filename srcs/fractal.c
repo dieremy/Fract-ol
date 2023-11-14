@@ -24,7 +24,7 @@ int	ft_strcmp(char *s1, char *s2)
 
 t_fractal	*id(char *s, t_fractal *d)
 {
-	d->max_i = 50;
+	d->max_i = 1000;
 	d->name = s;
 	d->zoom = 1;
 	d->x_shift = 0;
@@ -59,6 +59,9 @@ void	description(char *av[])
 
 void	which_fract(t_fractal *d)
 {
+    pthread_t th[NUM_THREADS];
+    t_fractal thread_data[NUM_THREADS];
+
 	if (ft_strcmp(d->name, "Mandelbrot") && ft_strcmp(d->name, "Julia")
 		&& ft_strcmp(d->name, "Douady"))
 	{
@@ -66,12 +69,38 @@ void	which_fract(t_fractal *d)
 		write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
 		exit(0);
 	}
-	if (ft_strcmp(d->name, "Mandelbrot") == 0)
-		mandelbrot(d);
+
+
+        for (int i = 0; i < NUM_THREADS; i++)
+        {
+            memcpy(&thread_data[i], d, sizeof(t_fractal)); // Copy the initial fractal data
+            if (strcmp(d->name, "Mandelbrot") == 0)
+                pthread_create(&th[i], NULL, mandelbrot, &thread_data[i]);
+            else if (ft_strcmp(d->name, "Julia") == 0)
+                pthread_create(&th[i], NULL, julia, &thread_data[i]);
+            else if (ft_strcmp(d->name, "Douady") == 0)
+                pthread_create(&th[i], NULL, douady, &thread_data[i]);
+        }
+        for (int i = 0; i < NUM_THREADS; i++) 
+            pthread_join(th[i], NULL);
+
+
+	/*if (ft_strcmp(d->name, "Mandelbrot") == 0) {
+        for (int i = 0; i < 10; i++) {
+            t_fractal *thread_data = malloc(sizeof(t_fractal));
+             if (thread_data == NULL) {
+                perror("Memory allocation failed");
+                exit(1);
+            }
+            memcpy(thread_data, d, sizeof(t_fractal)); // Copy the initial fractal data
+            pthread_create(&th[i], NULL, mandelbrot, thread_data);
+	    	//pthread_create(&th[i], NULL, mandelbrot, d);
+        }
+    }
 	else if (ft_strcmp(d->name, "Julia") == 0)
 		julia(d);
 	else if (ft_strcmp(d->name, "Douady") == 0)
-		douady(d);
+		douady(d);*/
 }
 
 int	main(int ac, char **av)
@@ -95,5 +124,6 @@ int	main(int ac, char **av)
 		write(2, "USAGE: ./fractal", 16);
 		write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
 	}
+    pthread_exit(NULL); 
 	return (0);
 }

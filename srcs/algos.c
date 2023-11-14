@@ -20,8 +20,10 @@ void	put_pixel_image(int x, int y, t_fractal *d, int color)
 	d->addr[pos] = color;
 }
 
-void	mandelbrot(t_fractal *mBrot)
+void	*mandelbrot(void *void_mBrot)
 {
+    t_fractal   *mBrot = (t_fractal *)void_mBrot;
+
 	mBrot->x = -1;
 	while (++mBrot->x < HW)
 	{
@@ -42,11 +44,14 @@ void	mandelbrot(t_fractal *mBrot)
 		}
 	}
 	mlx_look(mBrot);
+    return (0);
 }
 
-void	julia(t_fractal *julia)
+void	*julia(void *void_julia)
 {
-	julia->x = -1;
+    t_fractal   *julia = (t_fractal *)void_julia;
+	
+    julia->x = -1;
 	while (++julia->x < HW)
 	{
 		julia->y = -1;
@@ -66,11 +71,14 @@ void	julia(t_fractal *julia)
 		}
 	}
 	mlx_look(julia);
+    return (0);
 }
 
-void	douady(t_fractal *dou)
+void	*douady(void *void_dou)
 {
-	dou->x = -1;
+    t_fractal   *dou = (t_fractal *)void_dou;
+	
+    dou->x = -1;
 	while (++dou->x < HW)
 	{
 		dou->y = -1;
@@ -89,4 +97,5 @@ void	douady(t_fractal *dou)
 		}
 	}
 	mlx_look(dou);
+    return (0);
 }

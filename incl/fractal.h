@@ -22,6 +22,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <pthread.h> 
+# include <string.h>
+
+# define NUM_THREADS 10
 
 typedef struct s_fractal
 {
@@ -56,14 +60,14 @@ typedef struct s_fractal
 
 void	put_pixel_image(int x, int y, t_fractal *d, int color);
 void	julia_plane(t_fractal *julia);
-void	mandelbrot(t_fractal *mBrot);
+void	*mandelbrot(void *mBrot);
 void	mand_plane(t_fractal *mBrot);
 void	dou_plane(t_fractal *dou);
 void	which_fract(t_fractal *d);
-void	julia(t_fractal *julia);
+void	*julia(void *julia);
 void	mlx_look(t_fractal *d);
 void	description(char **av);
-void	douady(t_fractal *dou);
+void	*douady(void *dou);
 void	str_put(t_fractal *d);
 void	zoom(t_fractal *d);
 int		mouse_hook(int button, int x, int y, t_fractal *d);
