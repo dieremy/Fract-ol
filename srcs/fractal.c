@@ -59,7 +59,7 @@ void	description(char *av[])
 
 void	which_fract(t_fractal *d)
 {
-	pthread_t	th[NUM_THREADS];
+    pthread_t	th[NUM_THREADS];
 	t_fractal	*thread_data;
 
 	if (ft_strcmp(d->name, "Mandelbrot") && ft_strcmp(d->name, "Julia")
@@ -83,7 +83,7 @@ void	which_fract(t_fractal *d)
 	for (int i = 0; i < NUM_THREADS; i++) 
 		pthread_join(th[i], NULL);
 	for (int i = 0; i < NUM_THREADS; i++)
-		free(&thread_data[i]);
+        free(&thread_data[i]);
 }
 
 int	main(int ac, char **av)
@@ -107,6 +107,6 @@ int	main(int ac, char **av)
 		write(2, "USAGE: ./fractal", 16);
 		write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
 	}
-    pthread_exit(NULL); 
+	pthread_exit(NULL); 
 	return (0);
 }
