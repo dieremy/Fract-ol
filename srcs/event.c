@@ -43,11 +43,11 @@ void	mlx_look(t_fractal *d)
 	free(d);
 }
 
-int	ft_key_press3(int keycode, t_fractal *d)
+int	ft_key_press2(int keycode, t_fractal *d)
 {
 	if (keycode == KEY_ESC || keycode == KEY_X)
 	{
-		write(1, "\nWELCOME BACK TO REALITY SON.\n", 30);
+		write(1, "\nNICE COOK\n", 11);
 		mlx_destroy_window(d->mlx, d->win);
 		free(d);
 		exit(0);
@@ -58,55 +58,27 @@ int	ft_key_press3(int keycode, t_fractal *d)
 		d->zoom += 0.02;
 	else if (keycode == KEY_PLUS)
 		d->zoom -= 0.02;
-	which_fract(d);
-	return (0);
-}
-
-int	ft_key_press2(int keycode, t_fractal *d)
-{
-	if (keycode == KEY_M)
-	{
-		d->name = "Mandelbrot";
-		which_fract(d);
-	}
-	else if (keycode == KEY_J)
-	{
-		d->name = "Julia";
-		which_fract(d);
-	}
-	else if (keycode == KEY_D)
-	{
-		d->name = "Douady";
-		which_fract(d);
-	}
-	else
-		ft_key_press3(keycode, d);
 	return (0);
 }
 
 int	ft_key_press(int keycode, t_fractal *d)
 {
 	if (keycode == KEY_LEFT)
-	{
 		d->x_shift -= 0.04;
-		which_fract(d);
-	}
 	else if (keycode == KEY_RIGHT)
-	{
 		d->x_shift += 0.04;
-		which_fract(d);
-	}
 	else if (keycode == KEY_DOWN)
-	{
 		d->y_shift += 0.04;
-		which_fract(d);
-	}
 	else if (keycode == KEY_UP)
-	{
 		d->y_shift -= 0.04;
-		which_fract(d);
-	}
+	else if (keycode == KEY_M)
+		d->name = "Mandelbrot";
+	else if (keycode == KEY_J)
+		d->name = "Julia";
+	else if (keycode == KEY_D)
+		d->name = "Douady";
 	else
 		ft_key_press2(keycode, d);
+	which_fract(d);
 	return (0);
 }
