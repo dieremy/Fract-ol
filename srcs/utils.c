@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/fractal.h"
+#include "../include/fractal.h"
 
 void	str_put(t_fractal *d)
 {

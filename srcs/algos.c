@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/fractal.h"
+#include "../include/fractal.h"
 
 void	put_pixel_image(int x, int y, t_fractal *d, int color)
 {

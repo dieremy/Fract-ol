@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/fractal.h"
+#include "../include/fractal.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -24,7 +24,7 @@ int	ft_strcmp(char *s1, char *s2)
 
 t_fractal	*id(char *s, t_fractal *d)
 {
-	d->max_i = 1000;
+	d->max_i = 500;
 	d->name = s;
 	d->zoom = 1;
 	d->x_shift = 0;
