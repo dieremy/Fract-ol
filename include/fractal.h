@@ -36,7 +36,7 @@
 # include <pthread.h> 
 # include <string.h>
 
-# define NUM_THREADS 20
+# define NUM_THREADS 8
 
 typedef struct s_fractal
 {
@@ -70,15 +70,16 @@ typedef struct s_fractal
 }				t_fractal;
 
 void	put_pixel_image(int x, int y, t_fractal *d, int color);
+void    *plotting_fractal(void *void_data);
 void	julia_plane(t_fractal *julia);
-void	*mandelbrot(void *mBrot);
+void	mandelbrot(t_fractal *mBrot);
 void	mand_plane(t_fractal *mBrot);
 void	dou_plane(t_fractal *dou);
 void	which_fract(t_fractal *d);
-void	*julia(void *julia);
+void	julia(t_fractal *julia);
 void	mlx_look(t_fractal *d);
 void	description(char **av);
-void	*douady(void *dou);
+void	douady(t_fractal *dou);
 void	str_put(t_fractal *d);
 void	zoom(t_fractal *d);
 int		mouse_hook(int button, int x, int y, t_fractal *d);

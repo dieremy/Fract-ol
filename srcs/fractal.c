@@ -24,7 +24,7 @@ int	ft_strcmp(char *s1, char *s2)
 
 t_fractal	*id(char *s, t_fractal *d)
 {
-	d->max_i = 500;
+	d->max_i = 750;
 	d->name = s;
 	d->zoom = 1;
 	d->x_shift = 0;
@@ -61,29 +61,28 @@ void	which_fract(t_fractal *d)
 {
     pthread_t	th[NUM_THREADS];
 	t_fractal	*thread_data;
+    int         i;
 
-	if (ft_strcmp(d->name, "Mandelbrot") && ft_strcmp(d->name, "Julia")
+    if (ft_strcmp(d->name, "Mandelbrot") && ft_strcmp(d->name, "Julia")
 		&& ft_strcmp(d->name, "Douady"))
 	{
 		write(2, "USAGE: ./fractal", 16);
 		write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
 		exit(0);
 	}
-	for (int i = 0; i < NUM_THREADS; i++)
+    i = -1;
+	while (++i < NUM_THREADS)
 	{
 		thread_data = malloc(sizeof(t_fractal));
 		memcpy(thread_data, d, sizeof(t_fractal));
-		if (strcmp(d->name, "Mandelbrot") == 0)
-			pthread_create(&th[i], NULL, mandelbrot, thread_data);
-		else if (ft_strcmp(d->name, "Julia") == 0)
-			pthread_create(&th[i], NULL, julia, thread_data);
-		else if (ft_strcmp(d->name, "Douady") == 0)
-			pthread_create(&th[i], NULL, douady, thread_data);
+        pthread_create(&th[i], NULL, plotting_fractal, thread_data);
 	}
-	for (int i = 0; i < NUM_THREADS; i++) 
+    i = -1;
+    while (++i < NUM_THREADS)
+    {
 		pthread_join(th[i], NULL);
-	for (int i = 0; i < NUM_THREADS; i++)
         free(&thread_data[i]);
+    }
 }
 
 int	main(int ac, char **av)
@@ -97,8 +96,7 @@ int	main(int ac, char **av)
 		d->mlx = mlx_init();
 		d->win = mlx_new_window(d->mlx, HW, HW, "FRACT'OL");
 		d->img = mlx_new_image(d->mlx, HW, HW);
-		d->addr = (int *)mlx_get_data_addr(d->img, &d->bits_per_pixel,
-				&d->line_length, &d->endian);
+		d->addr = (int *)mlx_get_data_addr(d->img, &d->bits_per_pixel, &d->line_length, &d->endian);
 		id(av[1], d);
 		which_fract(d);
 	}

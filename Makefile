@@ -16,7 +16,6 @@ NAME = fractal
 
 # SRC AND OBJ FILES
 SRCS = srcs/fractal.c srcs/algos.c srcs/event.c srcs/utils.c
-
 OBJS = $(SRCS:.c=.o)
 
 
@@ -53,7 +52,7 @@ OS = ${shell uname}
 
 
 $(NAME): $(OBJS)
-	@echo "$(VIOLET)Compiling $(NAME)... $(NONE)\n\n"
+	@echo "Compiling $(NAME)...\n\n"
 
 ifeq ($(OS), Darwin)
 	@make mac
@@ -61,7 +60,7 @@ else
 	@make linux
 endif
 
-	@echo "$(CYAN)$(NAME) compiled successfully.$(VIOLET)"
+	@echo "$(NAME) compiled successfully."
 	@echo "$(SEP)$(NONE)"
 
 
@@ -70,14 +69,14 @@ all: $(NAME)
 
 linux:
 	@make all -s -C $(MLX_DIR_LNX)
-	@echo "Compiling $(VIOLET)Linux$(BLUE) mlx...\n\n\n"
+	@echo "Compiling Linux mlx...\n\n\n"
 	@$(CC) $(FLAG) $(OBJS) $(MLX_LNX) -o $(NAME) -g
 	@clear
 
 
 mac:
 	@make -s -C $(MLX_DIR_MAC)
-	@echo "Compiling $(VIOLET)Mac$(BLUE) mlx...\n\n\n"
+	@echo "Compiling Mac mlx...\n\n\n"
 	@$(CC) $(FLAG) $(OBJS) $(MLX_MAC) -o $(NAME) -g
 	@clear
 
@@ -91,16 +90,16 @@ else
 endif
 
 	@rm -rf $(OBJS)
-	@echo "${PURPLE}OBJS deleted.${NONE}"
+	@echo "OBJS deleted."
 
 
 fclean : clean
 	@rm -rf $(NAME)
-	@echo "${PURPLE}./${NAME} deleted${NONE}"
+	@echo "./${NAME} deleted"
 
 
 re : fclean all clean
-	@echo "${BLUE}RESTART${NONE}"
+	@echo "RESTART"
 
 
 .PHONY: clean fclean re all linux mac
