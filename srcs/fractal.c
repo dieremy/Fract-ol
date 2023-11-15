@@ -22,8 +22,11 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-t_fractal	*id(char *s, t_fractal *d)
+t_fractal	*id(char *s)
 {
+    t_fractal   *d;
+
+	d = (t_fractal *)malloc(sizeof(t_fractal));
 	d->max_i = 750;
 	d->name = s;
 	d->zoom = 1;
@@ -91,13 +94,12 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		d = (t_fractal *)malloc(sizeof(t_fractal));
 		description(av);
+        d = id(av[1]);
 		d->mlx = mlx_init();
 		d->win = mlx_new_window(d->mlx, HW, HW, "FRACT'OL");
 		d->img = mlx_new_image(d->mlx, HW, HW);
 		d->addr = (int *)mlx_get_data_addr(d->img, &d->bits_per_pixel, &d->line_length, &d->endian);
-		id(av[1], d);
 		which_fract(d);
 	}
 	else
