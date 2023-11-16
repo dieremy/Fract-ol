@@ -19,12 +19,14 @@
 
 #  include "minilibx/minilibx_mac/mlx.h"
 #  include "hook_mac.h"
+#  define NEW_ERROR_MP3 "open ./include/aNewError.mp3"
 
 # elif __linux__
 
 #  include "minilibx/minilibx-linux/mlx.h"
 #  include "minilibx/minilibx-linux/mlx_int.h"
 #  include "hook_linux.h"
+#  define NEW_ERROR_MP3 "xdg-open ./include/aNewError.mp3"
 
 # endif
 
@@ -35,6 +37,7 @@
 # include <math.h>
 # include <pthread.h> 
 # include <string.h>
+# include <signal.h>
 
 # define NUM_THREADS 8
 
@@ -58,6 +61,8 @@ typedef struct s_fractal
 	double	scaling;
 	float	x;
 	float	y;
+    int     proc;
+    int     pid;
 	int		*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -78,7 +83,6 @@ void	dou_plane(t_fractal *dou);
 void	which_fract(t_fractal *d);
 void	julia(t_fractal *julia);
 void	mlx_look(t_fractal *d);
-void	description(char **av);
 void	douady(t_fractal *dou);
 void	str_put(t_fractal *d);
 void	zoom(t_fractal *d);
@@ -86,5 +90,6 @@ int		mouse_hook(int button, int x, int y, t_fractal *d);
 int		ft_key_press(int keycode, t_fractal *d);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_close(t_fractal *d);
+int     description(char **av);
 
 #endif

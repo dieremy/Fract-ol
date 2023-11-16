@@ -42,6 +42,7 @@ int	ft_close(t_fractal *d)
 {
 	write(1, "\nNICE COOK\n", 11);
 	mlx_destroy_window(d->mlx, d->win);
+    kill(d->pid, SIGINT);
 	free(d);
 	exit(0);
 }

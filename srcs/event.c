@@ -49,6 +49,7 @@ int	ft_key_press2(int keycode, t_fractal *d)
 	{
 		write(1, "\nNICE COOK\n", 11);
 		mlx_destroy_window(d->mlx, d->win);
+        kill(d->proc, SIGINT);
 		free(d);
 		exit(0);
 	}

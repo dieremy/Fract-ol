@@ -40,10 +40,11 @@ t_fractal	*id(char *s)
 	return (d);
 }
 
-void	description(char *av[])
+int description(char *av[])
 {
-	if (!ft_strcmp(av[1], "Mandelbrot") || !ft_strcmp(av[1], "Julia")
-		|| !ft_strcmp(av[1], "Douady"))
+    ///// CLEAN THIS /////
+	if (ft_strcmp(av[1], "Mandelbrot") == 0 || ft_strcmp(av[1], "Julia") == 0
+		|| ft_strcmp(av[1], "Douady") == 0)
 	{
 		write(1, "KEYBOARD SHORCUTS:\n", 20);
 		write(1, "\tCLOSE THE WINDOW:\tX/ESC\n", 25);
@@ -57,7 +58,11 @@ void	description(char *av[])
 		write(1, "MOUSE INTERATION:\n", 18);
 		write(1, "\tZOOM/UNZOOM:\t\tMOUSE ROLL\n", 26);
 		write(1, "\tZOOM & MOVE:\t\tLEFT MOUSE CLICK\n", 32);
+        return (0);
 	}
+	write(2, "USAGE: ./fractal", 16);
+	write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
+    return (1);
 }
 
 void	which_fract(t_fractal *d)
@@ -66,6 +71,7 @@ void	which_fract(t_fractal *d)
 	t_fractal	*thread_data;
     int         i;
 
+    ///// THIS CHECK IS NO LONGER NECESSARY /////
     if (ft_strcmp(d->name, "Mandelbrot") && ft_strcmp(d->name, "Julia")
 		&& ft_strcmp(d->name, "Douady"))
 	{
@@ -92,21 +98,24 @@ int	main(int ac, char **av)
 {
 	t_fractal	*d;
 
+    ///// RE-PLAN MAIN FUNCTION /////
 	if (ac == 2)
 	{
-		description(av);
-        d = id(av[1]);
-		d->mlx = mlx_init();
-		d->win = mlx_new_window(d->mlx, HW, HW, "FRACT'OL");
-		d->img = mlx_new_image(d->mlx, HW, HW);
-		d->addr = (int *)mlx_get_data_addr(d->img, &d->bits_per_pixel, &d->line_length, &d->endian);
-		which_fract(d);
-	}
-	else
-	{
-		write(2, "USAGE: ./fractal", 16);
-		write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
-	}
-	pthread_exit(NULL); 
+		if (description(av) == 0)
+        {
+            d = id(av[1]);
+            d->pid = system(NEW_ERROR_MP3);
+            d->mlx = mlx_init();
+	    	d->win = mlx_new_window(d->mlx, HW, HW, "FRACT'OL");
+	    	d->img = mlx_new_image(d->mlx, HW, HW);
+	    	d->addr = (int *)mlx_get_data_addr(d->img, &d->bits_per_pixel, &d->line_length, &d->endian);
+	    	which_fract(d);
+        }
+        else 
+            exit(1);
+    }
+    write(2, "USAGE: ./fractal", 16);
+    write(2, "\tMandelbrot\tJulia\tDouady\n", 25);
+	pthread_exit(NULL);
 	return (0);
 }

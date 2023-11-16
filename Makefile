@@ -60,6 +60,7 @@ else
 	@make linux
 endif
 
+	@espeak "compiled muddafucka"
 	@echo "$(NAME) compiled successfully."
 	@echo "$(SEP)$(NONE)"
 
