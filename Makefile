@@ -78,7 +78,8 @@ mac:
 	@make -s -C $(MLX_DIR_MAC)
 	@echo "Compiling Mac mlx..."
 	@$(CC) $(FLAG) $(OBJS) $(MLX_MAC) -o $(NAME) -g
-	@clear
+	@printf "AS PER CALCULATIONS, YOU ARE HERE AFTER A COMPILATION ISSUE.\n- RELAX, YOU ONLY HAVE TO COMPRESS MINILIBX DIRECTORY.\n- ADD tar -xvf  WHEN COMPILING FILES.\n- ADD tar -cvf WHEN CLEANING FILES.\n"
+	#@clear
 
 
 clean :
